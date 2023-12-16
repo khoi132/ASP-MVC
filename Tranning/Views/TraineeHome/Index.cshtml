@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Tranning.Models.CourseModel
+@{
+    ViewData["Title"] = "Trainee page";
+    // co the code nhu trong controller
+    Layout = "~/Views/Shared/_TraineeLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h4 class="display-6">
+            List Course
+        </h4>
+        <div class="row">
+            @foreach (var item in Model.CourseDetailLists)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/Uploads/images/@item.avatar" alt="Course Avatar">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.name</h5>
+                            <p class="card-text">@item.description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

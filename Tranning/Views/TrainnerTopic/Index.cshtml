@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Tranning.Models.Trainner_TopicModel
+@{
+    ViewData["Title"] = "Trainner Topic page";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    bool statusAdd = Convert.ToBoolean(TempData["saveStatus"]);
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h4 class="display-6">
+            List Trainer Topic
+        </h4>
+        <a class="btn btn-primary btn-sm" href="@Url.Action("Add", "TrainnerTopic")"> Assign Trainer To Topic </a>
+
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+              @*   <p class="mb-0">
+                    Find by name : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    Topics: @Html.DropDownList("topicId", (SelectList)ViewBag.Topics, "All Topics", new { @class = "form-control" })
+                    Users: @Html.DropDownList("userId", (SelectList)ViewBag.Users, "All Users", new { @class = "form-control" })
+                    <button type="submit" class="btn btn-primary btn-sm mb-0">Search</button>
+                    <a asp-action="Index"> Back to full list</a> *@
+                @* </p> *@
+            </div>
+        </form>
+        <hr />
+
+        @if (TempData["saveStatus"] != null)
+        {
+            <div class="text-@(statusAdd ? "success" : "danger") my-2">
+                @if (statusAdd)
+                {
+                    <div class="text-success my-2"> Add Successfully</div>
+                }
+                else
+                {
+                    <div class="text-danger my-2"> Add Failure</div>
+                }
+            </div>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>TRAINER</th>
+                    <th>TOPIC NAME</th>
+                    <th>CREATED AT</th>
+                    <th>UPDATED AT</th>
+                    <th colspan="2" width="5%">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Trainner_TopicDetailLists)
+                {
+                    <tr>
+                        <td>@item.name</td>
+                       
+                        <td>@item.full_name</td>
+                        
+                        <td>@item.created_at</td>
+                        <td>@item.updated_at</td>
+                    
+                        <td>
+                            <a class="btn btn-info btn-sm" href="@Url.Action("Update","TrainnerTopic", new { id = @item.trainner_id })">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","TrainnerTopic", new { id = @item.trainner_id })">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
